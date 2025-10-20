@@ -21,6 +21,7 @@ class TelegramNotifier
     protected ?string $parseMode = 'HTML';
     protected ?int $messageThreadId = null;
     protected bool $useQueue = true;
+    protected ?string $queueName = null;
 
     /**
      * Конструктор з дефолтними значеннями
@@ -76,9 +77,10 @@ class TelegramNotifier
     /**
      * Використовувати чергу (асинхронно)
      */
-    public function withQueue(): self
+    public function withQueue(?string $queueName = null): self
     {
         $this->useQueue = true;
+        $this->queueName = $queueName;
         return $this;
     }
 
@@ -88,6 +90,16 @@ class TelegramNotifier
     public function withoutQueue(): self
     {
         $this->useQueue = false;
+        return $this;
+    }
+
+    /**
+     * Встановити назву черги
+     */
+    public function onQueue(string $queueName): self
+    {
+        $this->queueName = $queueName;
+        $this->useQueue = true;
         return $this;
     }
 
@@ -103,6 +115,10 @@ class TelegramNotifier
             parseMode: $this->parseMode,
             messageThreadId: $this->messageThreadId
         );
+
+        // Встановити назву черги для нотифікації
+        $queueName = $this->queueName ?? config('telegram-notifier.queue', 'default');
+        $notification->onQueue($queueName);
 
         if ($this->useQueue) {
             Notification::route('telegram-bot', null)->notify($notification);
