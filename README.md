@@ -1,10 +1,10 @@
-# Laravel Telegram Notifier
+# Laravel & Lumen Telegram Notifier
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/voronyuk/laravel-telegram-notifier.svg?style=flat-square)](https://packagist.org/packages/voronyuk/laravel-telegram-notifier)
 [![Total Downloads](https://img.shields.io/packagist/dt/voronyuk/laravel-telegram-notifier.svg?style=flat-square)](https://packagist.org/packages/voronyuk/laravel-telegram-notifier)
 [![License](https://img.shields.io/packagist/l/voronyuk/laravel-telegram-notifier.svg?style=flat-square)](https://packagist.org/packages/voronyuk/laravel-telegram-notifier)
 
-Flexible Telegram notification system for Laravel with support for different message types, queues, and specialized notification classes.
+Flexible Telegram notification system for Laravel and Lumen with support for different message types, queues, and specialized notification classes.
 
 ## Features
 
@@ -15,14 +15,18 @@ Flexible Telegram notification system for Laravel with support for different mes
 - HTML/Markdown formatting
 - Topic support for supergroups
 - Helper functions for quick access
-- Auto-discovery for Laravel 10+
+- Auto-discovery for Laravel 8+
+- Full Lumen support (8+)
 
 ## Requirements
 
-- PHP 8.1 or higher
-- Laravel 10.x or 11.x
+- PHP 7.3 or higher (PHP 8+ recommended)
+- Laravel 8.x, 9.x, 10.x, or 11.x
+- Lumen 8.x, 9.x, 10.x, or 11.x
 
 ## Installation
+
+### For Laravel
 
 Install the package via Composer:
 
@@ -30,7 +34,7 @@ Install the package via Composer:
 composer require voronyuk/laravel-telegram-notifier
 ```
 
-### Publish Configuration
+#### Publish Configuration
 
 Publish the configuration file:
 
@@ -39,6 +43,37 @@ php artisan vendor:publish --tag=telegram-notifier-config
 ```
 
 This will create a `config/telegram-notifier.php` file.
+
+The package will be auto-discovered in Laravel 8+.
+
+### For Lumen
+
+Installation in Lumen requires additional manual setup. See the [Lumen Installation Guide](LUMEN_INSTALLATION.md) for detailed instructions.
+
+Quick setup for Lumen:
+
+1. Install via Composer:
+```bash
+composer require voronyuk/laravel-telegram-notifier
+```
+
+2. Register Service Provider in `bootstrap/app.php`:
+```php
+$app->register(Voronyuk\TelegramNotifier\TelegramNotifierServiceProvider::class);
+```
+
+3. Copy config file manually:
+```bash
+mkdir -p config
+cp vendor/voronyuk/laravel-telegram-notifier/config/telegram-notifier.php config/
+```
+
+4. Load config in `bootstrap/app.php`:
+```php
+$app->configure('telegram-notifier');
+```
+
+See [LUMEN_INSTALLATION.md](LUMEN_INSTALLATION.md) for complete guide.
 
 ### Environment Configuration
 
