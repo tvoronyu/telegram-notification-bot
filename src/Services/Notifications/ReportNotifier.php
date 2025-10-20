@@ -15,7 +15,9 @@ class ReportNotifier extends TelegramNotifier
 {
     protected function getDefaultChatId(): string
     {
-        return config('services.telegram_bot.reports_chat_id', parent::getDefaultChatId());
+        return config('telegram-notifier.chats.reports')
+            ?? config('telegram-notifier.reports_chat_id')
+            ?? parent::getDefaultChatId();
     }
 
     /**

@@ -116,7 +116,7 @@ class TelegramNotifier
      */
     protected function getDefaultBotId(): int
     {
-        return config('services.telegram_bot.default_bot_id', 1);
+        return config('telegram-notifier.default_bot_id', 1);
     }
 
     /**
@@ -124,6 +124,6 @@ class TelegramNotifier
      */
     protected function getDefaultChatId(): string
     {
-        return config('services.telegram_bot.default_chat_id', '-1001234567890');
+        return config('telegram-notifier.default_chat_id', '-1001234567890');
     }
 }

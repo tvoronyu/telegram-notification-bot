@@ -24,12 +24,16 @@ class Error1CNotifier extends TelegramNotifier
 
     protected function getDefaultChatId(): string
     {
-        return config('services.telegram_bot.errors_chat_id', parent::getDefaultChatId());
+        return config('telegram-notifier.chats.errors_1c')
+            ?? config('telegram-notifier.errors_chat_id')
+            ?? parent::getDefaultChatId();
     }
 
     protected function getDefaultBotId(): int
     {
-        return config('services.telegram_bot.errors_bot_id', parent::getDefaultBotId());
+        return config('telegram-notifier.bots.errors_1c')
+            ?? config('telegram-notifier.errors_bot_id')
+            ?? parent::getDefaultBotId();
     }
 
     /**

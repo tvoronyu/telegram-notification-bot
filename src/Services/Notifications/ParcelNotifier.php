@@ -15,7 +15,9 @@ class ParcelNotifier extends TelegramNotifier
 {
     protected function getDefaultChatId(): string
     {
-        return config('services.telegram_bot.parcels_chat_id', parent::getDefaultChatId());
+        return config('telegram-notifier.chats.parcels')
+            ?? config('telegram-notifier.parcels_chat_id')
+            ?? parent::getDefaultChatId();
     }
 
     /**

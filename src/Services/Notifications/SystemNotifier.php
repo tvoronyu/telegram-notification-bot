@@ -15,7 +15,9 @@ class SystemNotifier extends TelegramNotifier
 {
     protected function getDefaultChatId(): string
     {
-        return config('services.telegram_bot.system_chat_id', parent::getDefaultChatId());
+        return config('telegram-notifier.chats.system')
+            ?? config('telegram-notifier.system_chat_id')
+            ?? parent::getDefaultChatId();
     }
 
     /**

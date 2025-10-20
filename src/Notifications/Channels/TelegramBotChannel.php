@@ -35,14 +35,14 @@ class TelegramBotChannel
         }
 
         // Get API key from config
-        $apiKey = config('services.telegram_bot.api_key');
+        $apiKey = config('telegram-notifier.api_key');
 
         if (empty($apiKey)) {
             Log::error('TelegramBotChannel: API key not configured. Set TELEGRAM_BOT_API_KEY in .env');
             return null;
         }
 
-        $url = config('services.telegram_bot.notify_url', 'https://telegram-bot.voronyuk.com/api/v1/notify');
+        $url = config('telegram-notifier.notify_url', 'https://telegram-bot.voronyuk.com/api/v1/notify');
 
         try {
             $response = Http::timeout(10)
