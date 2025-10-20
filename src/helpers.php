@@ -117,3 +117,16 @@ if (!function_exists('telegram_daily_report')) {
         (new \Voronyuk\TelegramNotifier\Services\Notifications\ReportNotifier())->daily($stats);
     }
 }
+
+if (! function_exists('now')) {
+    /**
+     * Create a new Carbon instance for the current time.
+     *
+     * @param  \DateTimeZone|string|null  $tz
+     * @return \Illuminate\Support\Carbon
+     */
+    function now($tz = null)
+    {
+        return Illuminate\Support\Facades\Date::now($tz);
+    }
+}
